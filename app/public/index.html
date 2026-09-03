@@ -1,0 +1,16 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MultiChat for OBS</title><link rel="stylesheet" href="/css/app.css"></head><body>
+<div class="app"><header><div><h1>MultiChat <small id="version">v1.0.0 Stable</small></h1><p>Todos os seus chats. Um só lugar.</p></div><span id="serverStatus" class="pill">conectando…</span></header>
+<section class="setup" id="setup">
+  <div class="platform twitch"><label><input type="checkbox" id="twitchEnabled" checked><strong>Twitch</strong></label><input id="twitchChannel" placeholder="Nome do canal (ex.: canal)"></div>
+  <div class="auth-box"><div><strong>Twitch: leitura pública</strong><div class="auth-text">Sem login e sem token. O MultiChat entra no canal informado apenas para leitura.</div></div></div>
+  <div class="platform youtube"><label><input type="checkbox" id="youtubeEnabled" checked><strong>YouTube</strong></label><input id="youtubeChannel" placeholder="@handle do canal"></div>
+  <div class="platform kick"><label><input type="checkbox" id="kickEnabled" checked><strong>Kick</strong><small>beta</small></label><input id="kickChannel" placeholder="Nome do canal"></div>
+  <div class="platform tiktok"><label><input type="checkbox" id="tiktokEnabled" checked><strong>TikTok</strong><small>beta</small></label><input id="tiktokChannel" placeholder="@usuário"></div>
+  <label class="demo"><input type="checkbox" id="demoMode"> Modo demonstração (gera mensagens para testar no OBS)</label>
+  <div class="actions"><button id="connectBtn">Conectar chats</button><button id="disconnectBtn">Desconectar</button><button id="clearBtn">Limpar chat</button></div>
+  <p class="privacy">🔒 Você informa somente os canais. Senhas das plataformas não são solicitadas. As configurações ficam salvas neste navegador/OBS.</p>
+  <div class="obs-tools"><div><strong>Uso no OBS</strong><div class="obs-help">Adicione este endereço em <b>Painéis → Docks de navegador personalizados</b>.</div></div><div class="obs-url"><code id="dockUrl">http://127.0.0.1:8787/dock</code><button id="copyDockBtn" type="button">Copiar endereço</button></div><span id="copyFeedback" class="copy-feedback" aria-live="polite"></span></div>
+</section>
+<nav id="filters"><button data-filter="all" class="active">Todos</button><button data-filter="twitch">Twitch</button><button data-filter="youtube">YouTube</button><button data-filter="kick">Kick</button><button data-filter="tiktok">TikTok</button></nav>
+<div id="statuses" class="statuses"></div><main id="chat" class="chat"><div class="empty">Aguardando conexão…</div></main>
+</div><script src="/socket.io/socket.io.js"></script><script src="/js/visuals.js?v=1.0.0"></script><script src="/js/kick-browser.js?v=1.0.0"></script><script src="/js/app.js?v=1.0.0"></script></body></html>

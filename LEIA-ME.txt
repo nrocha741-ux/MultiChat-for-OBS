@@ -1,0 +1,68 @@
+MultiChat for OBS v1.0.0 Stable
+================================
+
+VERSÃO ESTÁVEL
+Esta é a primeira versão estável do MultiChat for OBS, promovida a partir da v0.9.5 RC1 aprovada em testes reais com Twitch, YouTube, Kick e TikTok.
+Os conectores validados foram preservados; esta promoção concentra-se no acabamento e na documentação pública.
+
+COMO USAR
+1. Extraia todo o ZIP para uma pasta comum do Windows.
+2. Execute MultiChat_START.cmd.
+3. Mantenha a janela do CMD aberta enquanto estiver usando o MultiChat.
+4. Na primeira execução, o launcher prepara automaticamente o Node.js portátil e as dependências.
+5. O navegador abre automaticamente em:
+   http://127.0.0.1:8787/dock
+6. Informe somente os canais/@ desejados e clique em Conectar chats.
+7. Ao fechar o CMD principal, a instância do Node.js iniciada pelo MultiChat é encerrada automaticamente.
+
+OBS STUDIO
+No MultiChat há uma seção "Uso no OBS" com o endereço e um botão para copiar.
+No OBS Studio, abra:
+Painéis > Docks de navegador personalizados
+
+Use o endereço:
+http://127.0.0.1:8787/dock
+
+PLATAFORMAS
+- Twitch: leitura pública, sem login.
+- YouTube: leitura pública por @handle, sem API Key e sem Google Cloud.
+- Kick: leitura pública em modo de compatibilidade pelo navegador.
+- TikTok: leitura pública de LIVE por @usuário.
+
+MODO TEXT-FIRST
+O MultiChat prioriza texto para facilitar a leitura durante a transmissão.
+- Mensagem com texto + emote: mantém o texto e ignora o emote.
+- Mensagem somente com emote: é descartada.
+- Badges úteis como Streamer, Mod, Sub, Prime, Membro e Verificado podem continuar aparecendo.
+
+PRIVACIDADE E SEGURANÇA
+- Não exige Node.js instalado no Windows.
+- O runtime Node.js fica somente dentro da pasta do MultiChat.
+- Não solicita senha das plataformas para a leitura pública implementada.
+- Não utiliza a sua antiga YOUTUBE_API_KEY.
+- O servidor local aceita conexões somente em 127.0.0.1.
+
+ARQUIVOS PRINCIPAIS
+- MultiChat_START.cmd : inicialização normal.
+- MultiChat_DEBUG.cmd : inicialização com diagnóstico visível.
+- MultiChat_STOP.cmd  : encerramento manual de emergência.
+- VERSION.txt         : identificação desta build.
+- RELEASE-NOTES.txt   : resumo técnico desta versão estável.
+- CHANGELOG.md        : alterações por versão.
+- VERSION-HISTORY.md  : evolução do projeto.
+- GITHUB-SETUP.md     : preparação para publicação no GitHub.
+
+PRIMEIRA EXECUÇÃO
+O launcher apresenta o progresso real do download e da extração do Node.js portátil.
+Na instalação das dependências, o próprio npm mostra o andamento porque não existe um percentual 0-100 confiável para essa etapa.
+
+IMPORTANTE
+A pasta do MultiChat deve permanecer completa. Não mova apenas o START.cmd para outro local.
+Não feche o CMD principal enquanto estiver usando o Dock no navegador ou no OBS.
+
+STATUS DA v1.0.0 STABLE
+- Core de quatro plataformas: validado.
+- YouTube sem API Key: validado.
+- Launcher portátil: validado.
+- Encerramento do Node ao fechar o launcher: validado.
+- Configuração persistente e bloco de ajuda do OBS: validados.

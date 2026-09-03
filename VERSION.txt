@@ -1,0 +1,4 @@
+MultiChat for OBS
+Version: 1.0.0
+Canal: Stable
+Data: 2026-09-03

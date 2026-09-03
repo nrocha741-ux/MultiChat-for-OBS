@@ -1,0 +1,30 @@
+MultiChat for OBS v1.0.0 Stable - Release Notes
+=================================================
+
+Data: 2026-09-03
+Base aprovada: v0.9.5 RC1
+
+Esta é a primeira versão estável do MultiChat for OBS.
+
+VALIDADO EM TESTES REAIS
+- Twitch: leitura pública sem login.
+- YouTube: leitura pública por @handle, sem API Key.
+- Kick: leitura pública em modo de compatibilidade pelo navegador.
+- TikTok: leitura pública de LIVE por @usuário.
+- Quatro plataformas simultâneas no navegador e no Dock do OBS.
+- Launcher portátil: prepara Node.js e dependências automaticamente.
+- Encerramento: fechar o CMD principal encerra a instância Node.js iniciada pelo MultiChat.
+- Configurações de canais persistidas localmente no navegador/OBS.
+
+ALTERAÇÕES EM RELAÇÃO À v0.9.5 RC1
+- Promoção da Release Candidate aprovada para v1.0.0 Stable.
+- Conectores funcionais congelados: nenhuma alteração de protocolo nesta promoção.
+- Documentação reorganizada para distribuição pública e GitHub.
+- Adicionados CHANGELOG.md, VERSION-HISTORY.md, GITHUB-SETUP.md, CONTRIBUTING.md, SECURITY.md e documentação técnica.
+- Adicionado .gitignore para impedir publicação de runtime, dependências, logs e arquivos .env.
+
+ENDEREÇO DO DOCK
+http://127.0.0.1:8787/dock
+
+OBSERVAÇÃO
+Integrações públicas podem exigir manutenção futura se Twitch, YouTube, Kick ou TikTok alterarem seus serviços/protocolos.
