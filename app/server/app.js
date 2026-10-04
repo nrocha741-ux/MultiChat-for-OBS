@@ -17,7 +17,38 @@ function cleanChannel(platform, channel = '') {
   if (platform === 'youtube') return value.toLowerCase();
   return value.toLowerCase();
 }
+function parseKickContent(rawContent = '') {
+  const text = String(rawContent || '');
+  const emotes = [];
+  const emoteRegex = /\[emote:(\d+):([^\]]+)\]/gi;
 
+  let content = '';
+  let lastIndex = 0;
+  let match;
+
+  while ((match = emoteRegex.exec(text)) !== null) {
+    content += text.slice(lastIndex, match.index);
+
+    const start = content.length;
+    const id = match[1];
+    const name = match[2];
+
+    emotes.push({
+      id,
+      name,
+      start,
+      end: start,
+      platform: 'kick'
+    });
+
+    content += '\uFFFC';
+    lastIndex = match.index + match[0].length;
+  }
+
+  content += text.slice(lastIndex);
+
+  return { content, emotes };
+}
 const VERSION = '1.0.0';
 const app = express();
 const server = http.createServer(app);
@@ -255,35 +286,7 @@ io.on('connection', socket => {
           .map(b => String(b?.type || b?.text || b?.name || '').trim().toLowerCase())
           .filter(Boolean)
       : [];
-    // Text-first: tokens de emote da Kick não entram na mensagem exibida.
-    const rawContent = String(raw.content || '');
-const kickEmotes = [];
-const emoteRegex = /\[emote:(\d+):([^\]]+)\]/gi;
-let content = '';
-let lastIndex = 0;
-let match;
-
-while ((match = emoteRegex.exec(rawContent)) !== null) {
-  content += rawContent.slice(lastIndex, match.index);
-
-  const start = Array.from(content).length;
-  const id = match[1];
-  const name = match[2];
-
-  kickEmotes.push({
-    id,
-    name,
-    start,
-    end: start,
-    platform: 'kick',
-  });
-
-  content += '\uFFFC';
-  lastIndex = match.index + match[0].length;
-}
-
-content += rawContent.slice(lastIndex);
-content = content.replace(/\s{2,}/g, ' ').trim();
+    const { content, emotes: kickEmotes } = parseKickContent(raw.content || '');
     const created = raw.created_at || raw.createdAt || Date.now();
     const parsedTime = Date.parse(created);
     const msg = normalizeMessage({
