@@ -24,7 +24,7 @@ function textOnlyMessage(input) {
   let text = String(input?.message || '');
 
   if (platform === 'twitch') {
-    text = stripTwitchEmotes(text, input?.emotes);
+    // Keep the original Twitch text so the frontend can replace emote ranges with images.
     text = stripTwitchAction(text);
   }
   if (platform === 'kick') text = text.replace(/\[emote:\d+:[^\]]+\]/gi, ' ');
@@ -57,8 +57,8 @@ function normalizeMessage(input) {
     message: textOnlyMessage(input),
     avatar: input.avatar || '',
     badges: Array.isArray(input.badges) ? input.badges : [],
-    // v0.8.1: MultiChat é text-first. Emotes não são encaminhados ao frontend.
-    emotes: [],
+    // v0.8.1: // Preserve emotes parsed by the platform adapter.
+    emotes: Array.isArray(input.emotes) ? input.emotes : [],
     timestamp: input.timestamp || Date.now(),
     metadata: input.metadata || {}
   };

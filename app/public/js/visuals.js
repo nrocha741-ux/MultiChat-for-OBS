@@ -68,10 +68,55 @@
     }
   }
 
-  function appendText(container, message = '') {
-    container.appendChild(document.createTextNode(String(message || '')));
+function appendText(container, message = "", emotes = []) {
+  const text = String(message || "");
+  const list = Array.isArray(emotes) ? emotes : [];
+
+  if (!list.length) {
+    container.appendChild(document.createTextNode(text));
+    return;
   }
 
+  const sorted = [...list].sort((a, b) => Number(a.start) - Number(b.start));
+  let position = 0;
+
+  for (const emote of sorted) {
+    const start = Number(emote.start);
+    const end = Number(emote.end);
+
+    if (!Number.isInteger(start) || !Number.isInteger(end)) continue;
+    if (start < position || start < 0 || end < start || end >= text.length) continue;
+
+    if (start > position) {
+      container.appendChild(document.createTextNode(text.slice(position, start)));
+    }
+
+    const img = document.createElement("img");
+    img.className = "chat-emote";
+    img.alt = emote.name || "";
+    img.title = emote.name || "";
+
+    if (emote.platform === "kick") {
+      img.src = "https:" + "//files.kick.com/emotes/" + encodeURIComponent(emote.id) + "/fullsize";
+    } else {
+      img.src = "https:" + "//static-cdn.jtvnw.net/emoticons/v2/" + encodeURIComponent(emote.id) + "/default/dark/2.0";
+    }
+
+    img.loading = "lazy";
+    img.referrerPolicy = "no-referrer";
+
+    img.onerror = () => {
+      img.replaceWith(document.createTextNode(text.slice(start, end + 1)));
+    };
+
+    container.appendChild(img);
+    position = end + 1;
+  }
+
+  if (position < text.length) {
+    container.appendChild(document.createTextNode(text.slice(position)));
+  }
+}
   function makeAvatar(message) {
     if (!message?.avatar || typeof message.avatar !== 'string') return null;
     const img = document.createElement('img');

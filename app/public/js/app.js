@@ -134,7 +134,7 @@ socket.on('chat:message', m => {
   el.querySelector('.platform-name').textContent = m.platform.toUpperCase();
   el.querySelector('.time').textContent = new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const textBox = el.querySelector('.text');
-  window.MultiChatVisuals?.appendText(textBox, m.message);
+  window.MultiChatVisuals?.appendText(textBox, m.message, m.emotes || []);
   chat.appendChild(el);
   while (chat.children.length > 150) chat.firstChild.remove();
   el.style.display = filter === 'all' || filter === m.platform ? '' : 'none';
